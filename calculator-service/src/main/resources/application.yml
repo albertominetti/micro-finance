@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: discovery
+  application:
+    name: calculator-service
+
+info:
+  app:
+    name: Calculator service
+    description: This service calculate the average price for a listing
+    version: 1.0.0
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS

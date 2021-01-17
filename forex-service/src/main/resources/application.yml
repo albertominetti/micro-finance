@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: discovery
+  application:
+    name: forex-service
+
+info:
+  app:
+    name: Forex conversion service
+    description: This service retrieve forex info for several currencies
+    version: 1.0.0
+
+
+#freeforexapi-url: "https://www.freeforexapi.com/api/live?pairs={base}{target}"
+exchangeratesapi:
+  latest-rate-url: "https://api.exchangeratesapi.io/latest?symbols={base}&base={target}"
+  history-rate-url: "https://api.exchangeratesapi.io/history?start_at={from}&end_at={to}&symbols={base}&base={target}"

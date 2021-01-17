@@ -1,0 +1,15 @@
+info:
+  discovery-commons-version: 1.0.0
+
+server:
+  port: ${PORT:0}
+
+eureka:
+  client:
+    serviceUrl:
+      default-zone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.uuid}}
+

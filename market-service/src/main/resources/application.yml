@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: discovery
+  application:
+    name: market-service
+
+info:
+  app:
+    name: Market data service
+    description: This service retrieve the prices for symbol
+    version: 1.0.0
+
+marketstack:
+  eod-prices-url: "http://api.marketstack.com/v1/eod?access_key={token}&date_from={from}}&symbols={symbol}&date_to={to}"
