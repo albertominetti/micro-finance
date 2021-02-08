@@ -9,7 +9,7 @@
       Date: {{ forexRate.date }}
     </div>
     <div v-else>
-      Sorry, no Forex Rates here...
+      Sorry, no Forex Rate at the moment...
     </div>
   </div>
 </template>
