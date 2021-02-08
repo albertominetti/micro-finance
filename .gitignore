@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### token files ###
+**/application-token.yml
