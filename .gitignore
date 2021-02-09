@@ -2,6 +2,7 @@ HELP.md
 target/
 /mf-frontend/node/
 /mf-frontend/node_modules/
+/mf-frontend/dist/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -34,4 +35,5 @@ build/
 ### VS Code ###
 .vscode/
 
-/mf-frontend/dist/
+### token files ###
+**/application-token.yml

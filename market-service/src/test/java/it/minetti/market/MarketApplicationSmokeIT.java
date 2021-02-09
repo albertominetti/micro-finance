@@ -1,7 +1,8 @@
 package it.minetti.market;
 
+import com.google.common.collect.Iterables;
 import it.minetti.common.EurekaFeignHealthIndicator;
-import org.junit.jupiter.api.Disabled;
+import it.minetti.market.model.DailyPrices;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,13 +14,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@TestPropertySource(properties = "spring.cloud.discovery.enabled=false")
+@TestPropertySource(properties = {
+        "spring.cloud.discovery.enabled=false",
+        "MARKETSTACK_TOKEN=5b54788ea1c4f310a76f97f906a8704d" // test token
+})
 @MockBean(EurekaFeignHealthIndicator.class)
 class MarketApplicationSmokeIT {
 
@@ -30,12 +36,38 @@ class MarketApplicationSmokeIT {
     TestRestTemplate restTemplate;
 
     @Test
-    @Disabled
     public void smoke_controller() {
-        Object something = restTemplate.getForObject("http://localhost:{port}/prices/{symbol}?from={from}&to={to}",
-                String.class, port, "DND", "2020-01-01", "2020-01-02");
+        DailyPrices pricesResponse = restTemplate.getForObject("http://localhost:{port}/prices/daily/{symbol}?from={from}&to={to}",
+                DailyPrices.class, port, "VUG", "2021-02-03", "2021-02-05");
 
-        assertThat(something, is(notNullValue())); // TODO
+        assertThat(pricesResponse, is(notNullValue()));
+        Map<LocalDate, BigDecimal> prices = pricesResponse.getPrices();
+        assertThat(prices, is(notNullValue()));
+        assertThat(prices, hasKey(LocalDate.parse("2021-02-03")));
+        assertThat(prices, hasKey(LocalDate.parse("2021-02-04")));
+        assertThat(prices, hasKey(LocalDate.parse("2021-02-05")));
+
+        for (BigDecimal value : prices.values()) {
+            assertThat(value, greaterThan(new BigDecimal(260)));
+            assertThat(value, lessThan(new BigDecimal(266)));
+        }
+
+    }
+
+
+    @Test
+    public void smoke_controller_latest() {
+        DailyPrices pricesResponse = restTemplate.getForObject("http://localhost:{port}/prices/daily/{symbol}",
+                DailyPrices.class, port, "VUG");
+
+        assertThat(pricesResponse, is(notNullValue()));
+        Map<LocalDate, BigDecimal> prices = pricesResponse.getPrices();
+        assertThat(prices, is(notNullValue()));
+        assertThat(prices.size(), is(1));
+
+        BigDecimal value = Iterables.getOnlyElement(prices.values());
+        assertThat(value, greaterThan(new BigDecimal(250)));
+
     }
 
     @Test

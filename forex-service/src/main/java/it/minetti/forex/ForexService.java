@@ -28,8 +28,8 @@ public class ForexService {
         this.url = url;
     }
 
-    public ForexResponse getLatestRate(String base, String target) {
-        ExternalForexResponse response = restTemplate.getForObject(url, ExternalForexResponse.class, base, target);
+    public ForexResponse getLatestRate(String target, String reference) {
+        ExternalForexResponse response = restTemplate.getForObject(url, ExternalForexResponse.class, reference, target);
 
         if (response == null || response.getRates().isEmpty()) {
             throw new RuntimeException("Error in the forex provider.");
@@ -38,7 +38,7 @@ public class ForexService {
         return new ForexResponse(getOnlyElement(response.getRates().values()), response.getDate());
     }
 
-    public ForexResponses getHistoricalRates(String base, String target, LocalDate from, LocalDate to) {
+    public ForexResponses getHistoricalRates(String target, String reference, LocalDate from, LocalDate to) {
         throw new NotImplementedException();
     }
 

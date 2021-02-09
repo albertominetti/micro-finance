@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: discovery
+    include: discovery
   application:
     name: calculator-service
 
