@@ -10,6 +10,5 @@ module.exports = {
     }
   },
   transpileDependencies: ["vuetify"],
-  outputDir: "build/dist",
-  assetsDir: "mf/static"
+  assetsDir: "assets"
 };
