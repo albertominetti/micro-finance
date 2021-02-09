@@ -12,15 +12,15 @@ import java.math.BigDecimal;
 @FeignClient("forex-service")
 interface ForexService {
 
-    @GetMapping("/rates/{base}/{target}")
-    public ForexRate rates(@PathVariable String base, @PathVariable String target);
+    @GetMapping("/rates/{target}/{reference}")
+    ForexRate rates(@PathVariable String target, @PathVariable String reference);
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class ForexRate {
-        private String base;
+    class ForexRate {
         private String target;
+        private String reference;
         private BigDecimal value;
     }
 }
