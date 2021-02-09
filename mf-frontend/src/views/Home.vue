@@ -4,11 +4,11 @@
       <v-card-title>Hello World!</v-card-title>
       <v-card-subtitle>The requested Forex Rate is: </v-card-subtitle>
       <v-card-text v-if="forexRate">
-        <v-chip outlined>Base</v-chip>
-        {{ forexRate.base }}
-        <v-divider class="my-1" />
         <v-chip outlined>Target</v-chip>
         {{ forexRate.target }}
+        <v-divider class="my-1" />
+        <v-chip outlined>Reference</v-chip>
+        {{ forexRate.reference }}
         <v-divider class="my-1" />
         <v-chip outlined>Value</v-chip>
         {{ forexRate.value }}

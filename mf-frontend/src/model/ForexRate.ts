@@ -1,22 +1,14 @@
 export default class ForexRate {
-  private _base: string;
   private _target: string;
+  private _reference: string;
   private _value: number;
   private _date: Date;
 
   constructor(base: string, target: string, value: number, date: Date) {
-    this._base = base;
-    this._target = target;
+    this._target = base;
+    this._reference = target;
     this._value = value;
     this._date = date;
-  }
-
-  get base(): string {
-    return this._base;
-  }
-
-  set base(value: string) {
-    this._base = value;
   }
 
   get target(): string {
@@ -25,6 +17,14 @@ export default class ForexRate {
 
   set target(value: string) {
     this._target = value;
+  }
+
+  get reference(): string {
+    return this._reference;
+  }
+
+  set reference(value: string) {
+    this._reference = value;
   }
 
   get value(): number {

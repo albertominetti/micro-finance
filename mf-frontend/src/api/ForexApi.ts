@@ -3,14 +3,14 @@ import axios from "axios";
 
 export default class ForexApi {
   public static async getForexRate(
-    base: string,
-    target: string
+    target: string,
+    reference: string
   ): Promise<ForexRate | null> {
     try {
       const { data } = await axios.get(
-        `/forex-service/rates/${base}/${target}`
+        `/forex-service/rates/${target}/${reference}`
       );
-      return new ForexRate(data.base, data.target, data.value, data.date);
+      return new ForexRate(data.target, data.reference, data.value, data.date);
     } catch (e) {
       return null;
     }
