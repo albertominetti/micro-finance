@@ -1,6 +1,5 @@
 package it.minetti.forex;
 
-import it.minetti.forex.ForexService;
 import it.minetti.forex.ForexService.ExternalForexResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +30,7 @@ class ForexServiceTest {
 
     @Test
     void getSingleRate() {
-        when(restTemplate.getForObject(any(), any(), eq("EUR"), eq("CHF")))
+        when(restTemplate.getForObject(any(), any(), eq("CHF"), eq("EUR")))
                 .thenReturn(new ExternalForexResponse(Map.of("EUR", new BigDecimal("0.92")), LocalDate.now()));
 
         ForexService.ForexResponse singleRate = forexService.getLatestRate("EUR", "CHF");

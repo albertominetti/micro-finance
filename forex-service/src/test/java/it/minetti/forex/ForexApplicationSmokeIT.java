@@ -31,14 +31,14 @@ class ForexApplicationSmokeIT {
 
     @Test
     public void smoke_controller() {
-        ForexRate rate = restTemplate.getForObject("http://localhost:{port}/rates/{base}/{target}",
-                ForexRate.class, port, "EUR", "CHF");
+        ForexRate rate = restTemplate.getForObject("http://localhost:{port}/rates/{target}/{reference}",
+                ForexRate.class, port, "CHF", "EUR");
 
         assertThat(rate, is(notNullValue()));
-        assertThat(rate.getBase(), is("EUR"));
         assertThat(rate.getTarget(), is("CHF"));
+        assertThat(rate.getReference(), is("EUR"));
         assertThat(rate.getValue(), is(greaterThan(BigDecimal.ZERO)));
-        assertThat(rate.getValue(), is(lessThan(BigDecimal.TEN)));
+        assertThat(rate.getValue(), is(lessThan(BigDecimal.ONE)));
     }
 
     @Test
