@@ -16,7 +16,7 @@ class MarketServiceIT {
     @Test
     @Disabled // TODO
     void getSingleRate() {
-        MarketService marketService = new MarketService(new RestTemplate(), URL);
+        MarketService marketService = new MarketService(new RestTemplate(), new MarketstackProperties());
 
         Object prices = marketService.getHistoricalRates("xxx", LocalDate.now(), LocalDate.now());
 

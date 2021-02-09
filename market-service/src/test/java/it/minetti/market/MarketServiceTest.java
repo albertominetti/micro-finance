@@ -1,5 +1,6 @@
 package it.minetti.market;
 
+import it.minetti.market.marketstack.SymbolPricesResponse;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 
 import static java.util.Collections.singletonList;
@@ -32,7 +34,7 @@ class MarketServiceTest {
     @Disabled
     void getSingleRate() {
         when(restTemplate.getForObject(any(), any(), eq("EUR"), eq("CHF")))
-                .thenReturn(new MarketService.ExternalResponse(singletonList(new MarketService.SymbolPrice(BigDecimal.ONE, LocalDate.now()))));
+                .thenReturn(new SymbolPricesResponse(singletonList(new SymbolPricesResponse.SymbolPrice(BigDecimal.ONE, Instant.now()))));
 
         Object iwmt = marketService.getHistoricalRates("IWMT", LocalDate.now(), LocalDate.now());
 
