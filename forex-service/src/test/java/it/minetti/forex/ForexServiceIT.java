@@ -16,7 +16,7 @@ class ForexServiceIT {
     void getSingleRate() {
         ForexService forexService = new ForexService(new RestTemplate(), URL);
 
-        ForexService.ForexResponse singleRate = forexService.getLatestRate("EUR", "CHF");
+        ForexService.ForexResponse singleRate = forexService.getLatestRate("CHF", "EUR");
 
         assertThat(singleRate, is(notNullValue()));
         assertThat(singleRate.getRate(), is(greaterThan(ZERO)));
