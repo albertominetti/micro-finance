@@ -13,6 +13,6 @@ info:
 marketstack:
   token: ${MARKETSTACK_TOKEN}
   base-url: "http://api.marketstack.com/v1"
-  eod-prices-url: "eod?access_key=${marketstack.token}&date_from={from}&symbols={symbol}&date_to={to}"
+  eod-prices-url: "${marketstack.base-url}/eod?access_key=${marketstack.token}&date_from={from}&symbols={symbol}&date_to={to}"
   latest-price-url: "${marketstack.base-url}/eod/latest?access_key=${marketstack.token}&symbols={symbol}"
   exchanges-url: "${marketstack.base-url}/exchanges/{mic}?access_key=${marketstack.token}"

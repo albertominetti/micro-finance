@@ -11,7 +11,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 import java.math.BigDecimal;
@@ -22,9 +21,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-@ActiveProfiles("token") // TODO let's find a way to make it compile on github without exposing the token
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@TestPropertySource(properties = "spring.cloud.discovery.enabled=false")
+@TestPropertySource(properties = {
+        "spring.cloud.discovery.enabled=false",
+        "MARKETSTACK_TOKEN=5b54788ea1c4f310a76f97f906a8704d" // test token
+})
 @MockBean(EurekaFeignHealthIndicator.class)
 class MarketApplicationSmokeIT {
 
