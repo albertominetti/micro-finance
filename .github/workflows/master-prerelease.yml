@@ -18,6 +18,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
+      - name: Prepare version 'latest'
+        run: mvn versions:set -DnewVersion=latest
+
+      - name: Prepare version 'latest' for gateway-service
+        run: mvn versions:set -DnewVersion=latest -f gateway-service/pom.xml
+
       - name: Package with Maven
         run: mvn -B -U package
         
