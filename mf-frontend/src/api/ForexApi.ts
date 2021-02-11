@@ -12,7 +12,7 @@ export default class ForexApi {
       );
       return new ForexRate(data.target, data.reference, data.value, data.date);
     } catch (e) {
-      return null;
+      return null; // TODO handle it
     }
   }
 }

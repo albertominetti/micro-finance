@@ -1,11 +1,11 @@
 HELP.md
 target/
-/mf-frontend/node/
-/mf-frontend/node_modules/
-/mf-frontend/dist/
+**/node/
+**/node_modules/
+**/dist/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/reference/
-!**/src/test/**/reference/
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -37,10 +37,3 @@ build/
 
 ### token files ###
 **/application-token.yml
-/gateway-service/reference/classes/static/assets/js/app.8e2c03c2.js
-/gateway-service/reference/classes/static/assets/js/app.8e2c03c2.js.map
-/gateway-service/reference/classes/static/assets/js/chunk-vendors.979dc7af.js
-/gateway-service/reference/classes/static/assets/js/chunk-vendors.979dc7af.js.map
-/gateway-service/reference/classes/static/assets/css/chunk-vendors.15356d1d.css
-/gateway-service/reference/classes/static/favicon.ico
-/gateway-service/reference/classes/static/index.html
