@@ -1,10 +1,9 @@
 package it.minetti.market;
 
-import com.google.common.collect.Iterables;
-import it.minetti.market.marketstack.ExchangesResponse;
 import it.minetti.market.marketstack.ExchangesResponse.Exchange;
 import it.minetti.market.marketstack.SymbolPricesResponse;
 import it.minetti.market.model.DailyPrices;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,6 +13,7 @@ import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class MarketService {
 
@@ -39,6 +39,7 @@ public class MarketService {
     }
 
     public DailyPrices getLatestRate(String symbol) {
+        log.info("Serving the latest rate for {}.", symbol);
         SymbolPricesResponse response = restTemplate.getForObject(marketstackProperties.getLatestPriceUrl(), SymbolPricesResponse.class, symbol);
 
         if (response == null) {
@@ -57,6 +58,7 @@ public class MarketService {
     }
 
     public Exchange getExchange(String mic) {
+        log.info("Serving the data for exchange {}.", mic);
         // TODO review because we returns the same object from the API
         return restTemplate.getForObject(marketstackProperties.getExchangesUrl(), Exchange.class, mic);
     }
